@@ -14,6 +14,20 @@ app.use(async (ctx) => {
     const indexContent = await fs.promises.readFile(path.resolve(__dirname, './index.html'));
     ctx.response.body = indexContent;
     // 响应体设置好了  那么还需要告诉浏览器拿到响应之后以什么形式进行解析
+    // json ----> application/json  text/html  text/javascript
+    // 告诉浏览器以html的格式进行解析
+    ctx.response.set('Content-Type', 'text/html');
+  }
+  if(ctx.request.url === '/main.js') {
+    const mainJSContent = await fs.promises.readFile(path.resolve(__dirname, './main.js'));
+    ctx.response.body = mainJSContent;
+    ctx.response.set('Content-Type', 'text/javascript');
+  }
+  if(ctx.request.url === '/App.vue') {
+    const mainVueContent = await fs.promises.readFile(path.resolve(__dirname, './App.vue'));
+    ctx.response.body = mainVueContent;
+    // 遇到vue文件  vite会将其编译成js文件
+    ctx.response.set('Content-Type', 'text/javascript');
   }
 })
 

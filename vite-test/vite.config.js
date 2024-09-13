@@ -17,10 +17,10 @@ const envResolver = {
 
 export default defineConfig(({ command, mode }) => {
   // command 是build还是serve取决于敲得命令
-  console.log('process',process.cwd())
+  // console.log('process',process.cwd())
   // 当前env文件所在的目录
   // 第二个参数不是必须使用process.cwd()  是env文件的路径
   const env = loadEnv(mode, process.cwd(), '')
-  console.log('env///',env);
+  // console.log('env///',env);
   return envResolver[command]()
 })
